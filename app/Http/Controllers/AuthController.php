@@ -37,6 +37,7 @@ class AuthController extends Controller
 
         $validator = Validator::make($input, [
             'name' => 'required',
+            'username' => 'required|username|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
             'c_password' => 'required|same:password',
@@ -57,10 +58,10 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $input = $request->only('email', 'password');
+        $input = $request->only('username', 'password');
 
         $validator = Validator::make($input, [
-            'email' => 'required',
+            'username' => 'required',
             'password' => 'required',
         ]);
 
